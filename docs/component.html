@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My first Component</title>
 </head>
+
 <body>
     <script>
         const template = document.createElement('template');
-template.innerHTML=`
+        template.innerHTML = `
     <style>
     
-    button{
+    .ays{
         width: 130pt;
         height: 130pt;
         background: cornsilk;
@@ -27,34 +29,49 @@ template.innerHTML=`
 
 
     <div>
-        <button>אברהם</button>
-        <button>שור</button>
+        <button class="ays">אברהם</button>
+        <button class="ays">שור</button>
     </div>
 
      `;
-     class Shor extends HTMLElement {
-         constructor(){
-            super();
-        this._shadowRoot = this.attachShadow({ mode: 'open' });
-         this._shadowRoot.appendChild(template.content.cloneNode(true));
-         }
-         
-     }
-     window.customElements.define('avraham-shor',Shor)
+        class Shor extends HTMLElement {
+            constructor() {
+                super();
+                this._shadowRoot = this.attachShadow({ mode: 'open' });
+                this._shadowRoot.appendChild(template.content.cloneNode(true));
+                this.$ays = this._shadowRoot.querySelector('.ays');
+                this.attrs = {};
 
-</script>
-<div>
-<avraham-shor></avraham-shor>
-<avraham-shor></avraham-shor>
-</div>
-<div>
-        <avraham-shor></avraham-shor>
-        <avraham-shor></avraham-shor>
-        </div>
-        <div>
-                <avraham-shor></avraham-shor>
-                <avraham-shor></avraham-shor>
-                </div>
+            }
+            static get observedAttributes() { return ['bg', 'color']; }
+
+            attributeChangedCallback(name, oldVal, newVal) {
+                console.log(`att ${name} change from ${oldVal} to ${newVal}`)
+                this.attrs[name] = newVal;
+                this.render();
+            }
+            render() {
+                let bg = this.attrs.bg;
+                this.$ays.style.background = bg;
+                // let col = this.attrs.color;
+                // this.$ays.style.color = col;
+            }
+        }
+        window.customElements.define('avraham-shor', Shor);
+
+    </script>
+
+    <avraham-shor bg="blue"></avraham-shor>
+    <avraham-shor bg="pink"></avraham-shor>
+
+
+    <avraham-shor></avraham-shor>
+    <avraham-shor></avraham-shor>
+
+
+    <avraham-shor></avraham-shor>
+    <avraham-shor></avraham-shor>
+
 </body>
 
 
@@ -62,4 +79,4 @@ template.innerHTML=`
 
 
 
-</html> 
+</html>
