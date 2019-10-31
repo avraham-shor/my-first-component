@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My first Component</title>
+</head>
+<body>
+    <script>
+        const template = document.createElement('template');
+template.innerHTML=`
+    <style>
+    
+    button{
+        width: 130pt;
+        height: 130pt;
+        background: cornsilk;
+        padding: 50pt;
+        padding-bottom: 50pt;
+    }
+    div{
+        padding: 50pt; 
+    }
+
+    </style>
+
+
+    <div>
+        <button>אברהם</button>
+        <button>שור</button>
+    </div>
+
+     `;
+     class Shor extends HTMLElement {
+         constructor(){
+            super();
+        this._shadowRoot = this.attachShadow({ mode: 'open' });
+         this._shadowRoot.appendChild(template.content.cloneNode(true));
+         }
+         
+     }
+     window.customElements.define('avraham-shor',Shor)
+
+</script>
+<div>
+<avraham-shor></avraham-shor>
+<avraham-shor></avraham-shor>
+</div>
+<div>
+        <avraham-shor></avraham-shor>
+        <avraham-shor></avraham-shor>
+        </div>
+        <div>
+                <avraham-shor></avraham-shor>
+                <avraham-shor></avraham-shor>
+                </div>
+</body>
+
+
+
+
+
+
+</html> 
